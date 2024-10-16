@@ -8,7 +8,6 @@ import SignInPage from './auth/sign-in/index.jsx';
 const router = createBrowserRouter([
   {
     path:'/auth/sign-in',
-    element:<SignInPage/>
   }
 ])
 
