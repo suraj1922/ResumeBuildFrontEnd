@@ -10,6 +10,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog"
 import { Button } from '@/components/ui/button'
+import { Input } from "@/components/ui/input"
 
 const AddResume = () => {
     const [openDialog, setOpenDialog] = useState(false) 
@@ -22,13 +23,13 @@ const AddResume = () => {
             <Dialog open={openDialog}>
                 <DialogContent>
                     <DialogHeader>
-                        <DialogTitle>Are you absolutely sure?</DialogTitle>
+                        <DialogTitle>Create New Resume</DialogTitle>
                         <DialogDescription>
-                            This action cannot be undone. This will permanently delete your account
-                            and remove your data from our servers.
+                            <p>Add a title for your new resume</p>
+                           <Input className='my-2' placeholder='Ex.Full Stack Resume'/>
                         </DialogDescription>
                         <div className='flex justify-end gap-5'>
-                            <Button variant="ghost">Cancel</Button>
+                            <Button onClick={() => setOpenDialog(false)} variant="ghost">Cancel</Button>
                             <Button>Create</Button>
                         </div>
                     </DialogHeader>
