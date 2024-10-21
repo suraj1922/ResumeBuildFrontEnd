@@ -4,21 +4,46 @@ import { ResumeInfoContext } from '@/context/ResumeInfoContext'
 import { LoaderCircle } from 'lucide-react';
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
+import GlobalApi from '../../../../../services/GlobalApi'
+import { Toaster } from "@/components/ui/sonner"
+import { toast } from 'sonner';
 
-function PersonalDetail() {
-
+function PersonalDetail({enableNext}) {
+    const params = useParams();
     const {resumeInfo,setResumeInfo}=useContext(ResumeInfoContext)
+    const [formData,setFormData] = useState();
+    const [loading,setLoading] = useState(false);
+    useEffect(()=>{
+        console.log(params)
+    })
     const handleInputChage=(e)=>{
+        enableNext(false)
         const {name,value} = e.target;
 
+        setFormData({
+            ...formData,
+            [name]:value,
+        })
         setResumeInfo({
             ...resumeInfo,
             [name]:value,
         })
     }
 
-    const onSave  = () =>{
+    const onSave  = (e) =>{
         e.preventDefault();
+        setLoading(true)
+        const data={
+            data:formData
+        }
+        GlobalApi.UpdateResumeDetail(params?.resumeId,data).then(resp=>{
+            enableNext(true);
+            setLoading(false);
+            toast("Event has been created")
+        },(error)=>{
+            setLoading(false)
+        })
+        
     }
   return (
     <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
@@ -53,7 +78,8 @@ function PersonalDetail() {
                 </div>
             </div>
             <div className='mt-3 flex justify-end'>
-                <Button type="submit">Save</Button>
+                <Button type="submit"
+                disabled={loading}>{loading?<LoaderCircle className='animate-spin'/>:'Save'}</Button>
             </div>
         </form>
     </div>
