@@ -39,7 +39,7 @@ function PersonalDetail({enableNext}) {
         GlobalApi.UpdateResumeDetail(params?.resumeId,data).then(resp=>{
             enableNext(true);
             setLoading(false);
-            toast("Event has been created")
+            toast("Details Updated")
         },(error)=>{
             setLoading(false)
         })
@@ -54,27 +54,27 @@ function PersonalDetail({enableNext}) {
             <div className='grid grid-cols-2 mt-5 gap-3'>
                 <div>
                     <label className='text-sm'>First Name</label>
-                    <Input name="firstName" required onChange={handleInputChage}/>
+                    <Input name="firstName" required defaultValue={resumeInfo?.firstName} onChange={handleInputChage}/>
                 </div>
                 <div>
                     <label className='text-sm'>Last Name</label>
-                    <Input name="lastName" required onChange={handleInputChage}/>
+                    <Input name="lastName" required onChange={handleInputChage} defaultValue={resumeInfo?.lastName}/>
                 </div>
                 <div className='col-span-2'>
                     <label className='text-sm'>Job Title</label>
-                    <Input name="jobTitle" required onChange={handleInputChage}/>
+                    <Input name="jobTitle" required onChange={handleInputChage} defaultValue={resumeInfo?.jobTitle}/>
                 </div>
                 <div className='col-span-2'>
                     <label className='text-sm'>Address</label>
-                    <Input name="address" required onChange={handleInputChage}/>
+                    <Input name="address" required onChange={handleInputChage} defaultValue={resumeInfo?.address}/>
                 </div>
                 <div>
                     <label className='text-sm'>Phone</label>
-                    <Input name="phone" required onChange={handleInputChage}/>
+                    <Input name="phone" required onChange={handleInputChage} defaultValue={resumeInfo?.phone}/>
                 </div>
                 <div>
                     <label className='text-sm'>Email</label>
-                    <Input name="email" required onChange={handleInputChage}/>
+                    <Input name="email" required onChange={handleInputChage} defaultValue={resumeInfo?.email}/>
                 </div>
             </div>
             <div className='mt-3 flex justify-end'>

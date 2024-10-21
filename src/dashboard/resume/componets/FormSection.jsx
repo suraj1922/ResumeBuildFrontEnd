@@ -4,8 +4,9 @@ import PersonalDetail from './Preview/PersonalDetail'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, ArrowRight , LayoutGrid} from 'lucide-react'
 import PersonalDetails from './form/PersonalDetails'
+import Summary from '@/dashboard/resume/componets/form/Summary'
 const FormSection = () => {
-  const [activeFormIndex,setActiveFormIndex] = useState(2);
+  const [activeFormIndex,setActiveFormIndex] = useState(1);
   const [enableNext,setEnableNext] =useState(false)
   
   return (
@@ -24,8 +25,8 @@ const FormSection = () => {
       </div>
 
       {/* Personal Detail */}
-      {activeFormIndex==1?<PersonalDetails  enableNext={(v)=>setEnableNext(v)}/>:null}
-      {/* Summary */}
+      {activeFormIndex==1?  <PersonalDetails  enableNext={(v)=>setEnableNext(v)}/>
+      :activeFormIndex==2?<Summary enableNext={(v)=>setEnableNext(v)}/>:null}
 
       {/* Experience */}
 
