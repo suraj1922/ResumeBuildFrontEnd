@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import Editor from 'react-simple-wysiwyg';
@@ -19,8 +19,13 @@ const Experience = () => {
         formField
     ])
 
-    const handleChange = (index, event) => {
+    
 
+    const handleChange = (index, event) => {
+        const newEntries=experienceList.slice();
+        const {name,value}=event.target;
+        newEntries[index][name]=value;
+        setExperienceList(newEntries);
     }
 
     const AddNewExperience=()=>{
@@ -29,6 +34,14 @@ const Experience = () => {
     const RemoveExperience=()=>{
         setExperienceList(experienceList=>experienceList.slice(0,-1))
     }
+    const handleRichTextEditor=(e,name,index)=>{
+        const newEntries=experienceList.slice();
+        newEntries[index][name]=e.target.value;
+        setExperienceList(newEntries);
+    }
+    useEffect(()=>{
+        console.log(experienceList)
+    },[experienceList])
     return (
         <div>
             <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
@@ -79,7 +92,8 @@ const Experience = () => {
                                     />
                                 </div>
                                <div className='col-span-2'>
-                                <RichEditor/>
+                                <RichEditor  
+                                onRichTextEditorChange={(e)=>handleRichTextEditor(e,'workSummery',index)}/>
                                </div>
                             </div>
                         </div>

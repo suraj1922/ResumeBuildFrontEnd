@@ -23,6 +23,7 @@ const RichEditor = () => {
             <EditorProvider>
                 <Editor value={value} onChange={() => {
                     setValue(e.target.value)
+                    onRichTextEditorChange(e)
                 }}>
                     <Toolbar>
                         <BtnBold />
