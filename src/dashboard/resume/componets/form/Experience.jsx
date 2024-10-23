@@ -3,6 +3,8 @@ import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import Editor from 'react-simple-wysiwyg';
 import RichEditor from '../RichEditor';
+import { useContext } from 'react';
+import { ResumeInfoContext } from '@/context/ResumeInfoContext';
 const formField = {
     title: '',
     companyName: '',
@@ -19,7 +21,7 @@ const Experience = () => {
         formField
     ])
 
-    
+    const {resumeInfo,setResumeInfo} =useContext(ResumeInfoContext)
 
     const handleChange = (index, event) => {
         const newEntries=experienceList.slice();
@@ -40,7 +42,10 @@ const Experience = () => {
         setExperienceList(newEntries);
     }
     useEffect(()=>{
-        console.log(experienceList)
+        setResumeInfo({
+            ...resumeInfo,
+            experience:experienceList
+        })
     },[experienceList])
     return (
         <div>
@@ -93,6 +98,7 @@ const Experience = () => {
                                 </div>
                                <div className='col-span-2'>
                                 <RichEditor  
+                                index={index}
                                 onRichTextEditorChange={(e)=>handleRichTextEditor(e,'workSummery',index)}/>
                                </div>
                             </div>
