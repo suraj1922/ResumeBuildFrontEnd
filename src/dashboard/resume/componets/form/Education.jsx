@@ -5,9 +5,12 @@ import { Textarea } from '@/components/ui/textarea'
 import { toast } from 'sonner'
 import { LoaderCircle } from 'lucide-react'
 import { ResumeInfoContext } from '@/context/ResumeInfoContext'
+import { useParams } from 'react-router-dom'
+import GlobalApi from '../../../../../services/GlobalApi'
 const Education = () => {
     const [loading, setLoading] = useState(false)
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext)
+    const {params} = useParams
     const [educationalList, setEdcationalList] = useState([
         {
             universityName: '',
@@ -44,6 +47,20 @@ const Education = () => {
     }
 
     const onSave = () => {
+        setLoading(true)
+        const data={
+            data:{
+                education:educationalList
+            }
+        }
+        GlobalApi.UpdateResumeDetail(params.resumeId,data).then(resp=>{
+            console.log(resp);
+            setLoading(false);
+            toast('Details updated!')
+        },(error)=>{
+            setLoading(false);
+            toast('Error updating details')
+        })
 
     }
 

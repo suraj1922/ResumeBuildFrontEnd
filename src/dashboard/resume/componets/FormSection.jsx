@@ -7,6 +7,7 @@ import PersonalDetails from './form/PersonalDetails'
 import Summary from '@/dashboard/resume/componets/form/Summary'
 import Experience from '@/dashboard/resume//componets/form/Experience'
 import Education from '@/dashboard/resume/componets/form/Education'
+import Skills from '@/dashboard/resume/componets/form/Skills'
 const FormSection = () => {
   const [activeFormIndex, setActiveFormIndex] = useState(1);
   const [enableNext, setEnableNext] = useState(false)
@@ -35,7 +36,9 @@ const FormSection = () => {
         <Experience />
         : activeFormIndex == 4 ?
         <Education/>
-        : null
+        : activeFormIndex == 5 ?
+        <Skills/>
+        : nullS
       }
 
       {/* Experience */}
