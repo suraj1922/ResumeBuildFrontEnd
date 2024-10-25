@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import React, { useContext, useEffect, useState } from 'react'
-import RichEditor from '../RichEditor'
+import RichTextEditor from '../RichEditor'
 import { ResumeInfoContext } from '@/context/ResumeInfoContext'
 import { useParams } from 'react-router-dom'
-import GlobalApi from '../../../../../services/GlobalApi'
+import GlobalApi from "../../../../../services/GlobalApi"
 import { toast } from 'sonner'
 import { LoaderCircle } from 'lucide-react'
 
@@ -25,8 +25,9 @@ function Experience() {
     const [loading,setLoading]=useState(false);
 
     useEffect(()=>{
-        resumeInfo?.experience.length>0&&setExperinceList(resumeInfo?.experience)       
-    },[resumeInfo])
+        resumeInfo?.Experience?.length>0&&setExperinceList(resumeInfo?.Experience)
+        
+    },[])
 
     const handleChange=(index,event)=>{
         const newEntries=experinceList.slice();
@@ -139,7 +140,7 @@ function Experience() {
                         </div>
                         <div className='col-span-2'>
                            {/* Work Summery  */}
-                           <RichEditor
+                           <RichTextEditor
                            index={index}
                            defaultValue={item?.workSummery}
                            onRichTextEditorChange={(event)=>handleRichTextEditor(event,'workSummery',index)}  />

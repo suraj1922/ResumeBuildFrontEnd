@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { Home } from 'lucide-react'
 import PersonalDetail from './Preview/PersonalDetail'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft, ArrowRight, LayoutGrid } from 'lucide-react'
@@ -8,14 +9,19 @@ import Summary from '@/dashboard/resume/componets/form/Summary'
 import Experience from '@/dashboard/resume//componets/form/Experience'
 import Education from '@/dashboard/resume/componets/form/Education'
 import Skills from '@/dashboard/resume/componets/form/Skills'
+import { Link, Navigate, useParams } from 'react-router-dom';
+
 const FormSection = () => {
   const [activeFormIndex, setActiveFormIndex] = useState(1);
   const [enableNext, setEnableNext] = useState(false)
-
+  const {resumeId} = useParams()
   return (
     <div>
       <div className='flex justify-between items-center'>
-        <div>
+        <div className='flex gap-2'>
+          <Link to={"/dashboard"}>
+            <Button><Home /></Button>
+          </Link>
           <Button variant="outline" size="sm" className="flex gap-2"><LayoutGrid />Theme</Button>
         </div>
         <div className='flex gap-2'>
@@ -31,14 +37,16 @@ const FormSection = () => {
       {activeFormIndex == 1 ?
         <PersonalDetails enableNext={(v) => setEnableNext(v)} />
         : activeFormIndex == 2 ?
-        <Summary enableNext={(v) => setEnableNext(v)} />
-        : activeFormIndex == 3 ?
-        <Experience />
-        : activeFormIndex == 4 ?
-        <Education/>
-        : activeFormIndex == 5 ?
-        <Skills/>
-        : nullS
+          <Summary enableNext={(v) => setEnableNext(v)} />
+          : activeFormIndex == 3 ?
+            <Experience />
+            : activeFormIndex == 4 ?
+              <Education />
+              : activeFormIndex == 5 ?
+                <Skills />
+                : activeFormIndex == 6 ?
+                <Navigate to={'/my-resume/'+resumeId+"/view"}/>
+                :null
       }
 
       {/* Experience */}
