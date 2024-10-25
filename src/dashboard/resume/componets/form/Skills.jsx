@@ -18,6 +18,9 @@ const Skills = () => {
     const [loading, setLoading] = useState(false)
     const {resumeInfo, setResumeInfo} = useContext(ResumeInfoContext)
     const {resumeId} = useParams()
+    useEffect(()=>{
+        resumeInfo&&setSkillsList(resumeInfo?.skills)
+    },[resumeInfo])
     const handlerChange = (index, name, value) => {
         const newEntries=skillsList.slice();
         newEntries[index][name]=value;
@@ -72,7 +75,8 @@ const Skills = () => {
                         <div className='flex justify-between border rounded-lg p-3 mb-2' key={index}>
                             <div>
                                 <label htmlFor="" className='text-sm'>Name</label>
-                                <Input className="w-full" onChange={(e) => handlerChange(index, 'name', e.target.value)}></Input>
+                                <Input className="w-full" onChange={(e) => handlerChange(index, 'name', e.target.value)}
+                                defaultValue={item.name}></Input>
                             </div>
                             <Rating style={{ maxWidth: 120 }} value={item.rating} onChange={(v) => handlerChange(index, 'rating', v)}></Rating>
                         </div>
