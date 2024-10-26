@@ -19,5 +19,6 @@ export default {
     GetUserResumes,
     UpdateResumeDetail,
     GetResumeById,
-    DeleteResumeById
+    DeleteResumeById,
 }
+

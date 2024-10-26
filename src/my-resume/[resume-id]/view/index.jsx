@@ -31,9 +31,10 @@ const ViewResume = () => {
     }
 
     return (
+        
         <ResumeInfoContext.Provider value={{ resumeInfo, setResumeInfo }}>
+            <Header />
             <div id='no-print' className='my-10 mx-10 md:mx-20 lg:mx-36'>
-                <Header />
                 <div className='my-10 mx-10 md:mx-20 lg:mx-36'>
                     <h2 className='text-center text-2xl font-medium'>Hey! Your Resume is Ready</h2>
                     <p className='text-center text-gray-400'>Your resume is ready to Download and share you can chare ot with friends</p>
