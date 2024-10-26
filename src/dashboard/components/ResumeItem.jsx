@@ -1,8 +1,43 @@
-import { Notebook } from 'lucide-react'
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { MoreVertical, Notebook } from 'lucide-react'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+import GlobalApi from '../../../services/GlobalApi'
+import { toast } from 'sonner'
 
-const ResumeItem = ({ resume }) => {
+
+const ResumeItem = ({ resume,refreshData }) => {
+  const [openAlert, setopenAlert] = useState(false)
+  const navigation = useNavigate();
+  const onMenuCLick = (url) => {
+    navigation(url)
+  }
+
+  const onDelete=()=>{
+    GlobalApi.DeleteResumeById(resume.documentId).then(resp=>{
+      console.log(resp);
+      toast('Resume Delete');
+      refreshData()
+    })
+  }
   return (
     <div>
       <Link to={'/dashboard/resume/' + resume.documentId + "/edit"}>
@@ -27,6 +62,33 @@ const ResumeItem = ({ resume }) => {
           background: resume?.themeColor
         }}>
         <h2 className='text-sm'>{resume.title}</h2>
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <MoreVertical className='h-4 w-4 cursor-pointer' />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem onClick={() => navigation('/dashboard/resume/' + resume.documentId + "/edit")}>Edit</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigation('/my-resume/' + resume.documentId + "/view")}>View</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => navigation('/my-resume/' + resume.documentId + "/view")}>Download</DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setopenAlert(true)}>Delete</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <AlertDialog open={openAlert}>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your account
+                and remove your data from our servers.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel onClick={()=>setopenAlert(false)}>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={onDelete}>Continue</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
       </div>
     </div>
 
