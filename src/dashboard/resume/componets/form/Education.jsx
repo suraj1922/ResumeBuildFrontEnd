@@ -5,7 +5,7 @@ import { ResumeInfoContext } from '@/context/ResumeInfoContext'
 import { LoaderCircle } from 'lucide-react'
 import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import GlobalApi from "../../../../../services/GlobalApi"
+import GlobalApi from '../../../../../services/GlobalApi'
 import { toast } from 'sonner'
 
 function Education() {
@@ -24,9 +24,20 @@ function Education() {
     }
   ])
 
-  useEffect(()=>{
-    resumeInfo&&setEducationalList(resumeInfo?.education)
-  },[])
+  useEffect(() => {
+    // If resumeInfo.education is undefined, default to an empty array
+    setEducationalList(Array.isArray(resumeInfo?.education) ? resumeInfo.education : [
+      {
+        universityName: '',
+        degree: '',
+        major: '',
+        startDate: '',
+        endDate: '',
+        description: ''
+      }
+    ]);
+  }, []);
+  
   const handleChange=(event,index)=>{
     const newEntries=educationalList.slice();
     const {name,value}=event.target;
@@ -34,18 +45,21 @@ function Education() {
     setEducationalList(newEntries);
   }
 
-  const AddNewEducation=()=>{
-    setEducationalList([...educationalList,
+  const AddNewEducation = () => {
+    console.log("Current educationalList:", educationalList); // Debugging line
+    setEducationalList([
+      ...educationalList,
       {
-        universityName:'',
-        degree:'',
-        major:'',
-        startDate:'',
-        endDate:'',
-        description:''
+        universityName: '',
+        degree: '',
+        major: '',
+        startDate: '',
+        endDate: '',
+        description: ''
       }
-    ])
-  }
+    ]);
+  };
+  
   const RemoveEducation=()=>{
     setEducationalList(educationalList=>educationalList.slice(0,-1))
 
@@ -79,7 +93,6 @@ function Education() {
     <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
     <h2 className='font-bold text-lg'>Education</h2>
     <p>Add Your educational details</p>
-
     <div>
       {educationalList?.map((item,index)=>(
         <div key={index}>

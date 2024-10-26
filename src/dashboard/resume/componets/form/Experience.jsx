@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import RichTextEditor from '../RichEditor'
 import { ResumeInfoContext } from '@/context/ResumeInfoContext'
 import { useParams } from 'react-router-dom'
-import GlobalApi from "../../../../../services/GlobalApi"
+import GlobalApi from '../../../../../services/GlobalApi'
 import { toast } from 'sonner'
 import { LoaderCircle } from 'lucide-react'
 
@@ -26,7 +26,6 @@ function Experience() {
 
     useEffect(()=>{
         resumeInfo?.Experience?.length>0&&setExperinceList(resumeInfo?.Experience)
-        
     },[])
 
     const handleChange=(index,event)=>{
@@ -70,25 +69,30 @@ function Experience() {
     },[experinceList]);
 
 
-    const onSave=()=>{
-        setLoading(true)
-        const data={
-            data:{
-                Experience:experinceList.map(({ id, ...rest }) => rest)
+    const onSave = async () => {
+        setLoading(true);
+        const data = {
+            data: {
+                Experience: experinceList.map(({ id, ...rest }) => rest)
             }
+        };
+        console.log('Data to be sent:', data); // Log data structure
+    
+        try {
+            const res = await GlobalApi.UpdateResumeDetail(params?.resumeId, data);
+            console.log('API Response:', res); // Log successful API response
+            toast('Details updated!');
+        } catch (error) {
+            console.error('API Error:', error); // Log error
+            console.log('Error Response Data:', error?.response?.data); // Log specific error data if available
+            console.log('Error Config:', error?.config); // Log axios request configuration for debugging
+        } finally {
+            setLoading(false);
         }
-
-         console.log(experinceList)
-
-        GlobalApi.UpdateResumeDetail(params?.resumeId,data).then(res=>{
-            console.log(res);
-            setLoading(false);
-            toast('Details updated !')
-        },(error)=>{
-            setLoading(false);
-        })
-
-    }
+    };
+    
+    
+    
   return (
     <div>
         <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
