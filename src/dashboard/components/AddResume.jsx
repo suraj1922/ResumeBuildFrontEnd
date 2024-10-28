@@ -1,4 +1,4 @@
-import { Loader2, PlusSquare } from 'lucide-react'
+import { Loader2, Navigation, PlusSquare } from 'lucide-react'
 import React from 'react'
 import { useState } from 'react'
 import {
@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input"
 import { v4 as uuidv4 } from 'uuid';
 import GlobalApi from './../../../services/GlobalApi'
 import { useUser } from '@clerk/clerk-react'
+import { Navigate, useNavigate } from 'react-router-dom'
 // import { title } from 'process'
 // import { error } from 'console'
 
@@ -22,6 +23,7 @@ const AddResume = () => {
     const [resumeTitle, setresumeTile] = useState();
     const { user } = useUser();
     const [loading, setLoading] = useState(false);
+    const navigation = useNavigate()
     const onCreate = () => {
         setLoading(true);
         const uuid = uuidv4();
@@ -38,7 +40,7 @@ const AddResume = () => {
             console.log(resp)
             if (resp) {
                 setLoading(false);
-                navigator('/dashboard/resume/' + resp.data.data.document + "/edit")
+                navigation('/dashboard/resume/' + resp.data.data.document + "/edit")
             }
         }, (error) => {
             setLoading(false)
