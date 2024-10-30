@@ -34,10 +34,14 @@ function ThemeColor() {
                 themeColor: color
             }
         }
-        GlobalApi.UpdateResumeDetail(resumeId, data).then(resp => {
-            console.log(resp);
-            toast('Theme Color Updated')
-        })
+        GlobalApi.UpdateResumeDetail(resumeId, data)
+            .then(resp => {
+                console.log(resp);
+                toast('Theme Color Updated');
+            })
+            .catch(error => {
+                console.error("Error updating theme color:", error.response?.data || error.message);
+            });
     }
 
     return (
@@ -48,9 +52,9 @@ function ThemeColor() {
             </PopoverTrigger>
             <PopoverContent>
                 <h2 className='mb-2 text-sm font-bold'>Select Theme Color</h2>
-                <div className='grid grid-cols-5 gap-3'>
+                <div className='grid grid-cols-5 gap-3' >
                     {colors.map((item, index) => (
-                        <div
+                        <div key={index}
                             onClick={() => onColorSelect(item)}
                             className={`h-5 w-5 rounded-full cursor-pointer hover:border-black border${selectedColor == item && 'border border-black'}`}
                             style={{

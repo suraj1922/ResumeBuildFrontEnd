@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom'
 import GlobalApi from '../../../../../services/GlobalApi'
 import { toast } from 'sonner'
 import { LoaderCircle } from 'lucide-react'
+import { format } from 'date-fns';
 
 const formField={
     title:'',
@@ -19,7 +20,7 @@ const formField={
 
 }
 function Experience() {
-    const [experienceList,setexperienceList]=useState([
+    const [experienceList,setExperienceList]=useState([
         {
             title:'',
             companyName:'',
@@ -36,7 +37,7 @@ function Experience() {
     const [loading,setLoading]=useState(false);
 
     useEffect(()=>{
-        resumeInfo?.Experience?.length>0&&setexperienceList(resumeInfo?.Experience)
+        resumeInfo?.experience?.length>0&&setExperienceList(resumeInfo?.experience)
     },[])
 
     const handleChange=(index,event)=>{
@@ -44,12 +45,12 @@ function Experience() {
         const {name,value}=event.target;
         newEntries[index][name]=value;
         console.log(newEntries)
-        setexperienceList(newEntries);
+        setExperienceList(newEntries);
     }
 
     const AddNewExperience=()=>{
     
-        setexperienceList([...experienceList,{
+        setExperienceList([...experienceList,{
             title:'',
             companyName:'',
             city:'',
@@ -61,13 +62,13 @@ function Experience() {
     }
 
     const RemoveExperience=()=>{
-        setexperienceList(experienceList=>experienceList.slice(0,-1))
+        setExperienceList(experienceList=>experienceList.slice(0,-1))
     }
 
     const handleRichTextEditor=(e,name,index)=>{
         const newEntries=experienceList.slice();
         newEntries[index][name]=e.target.value;
-        setexperienceList(newEntries);
+        setExperienceList(newEntries);
     }
 
     useEffect(()=>{
@@ -77,24 +78,33 @@ function Experience() {
         });
     },[experienceList]);
 
+    
 
-    const onSave =  () => {
+
+    const onSave = async () => {
         setLoading(true);
+        const formattedExperienceList = experienceList.map(({ startDate, endDate, ...rest }) => ({
+            ...rest,
+            startDate: startDate ? format(new Date(startDate), 'yyyy-MM-dd') : null,
+            endDate: endDate ? format(new Date(endDate), 'yyyy-MM-dd') : null,
+        }));
+    
         const data = {
             data: {
-                experience: experienceList.map(({ id, ...rest }) => rest)
+                experience: formattedExperienceList
             }
         };
-        GlobalApi.UpdateResumeDetail(params.resumeId, data).then(resp=>{
-            console.log(resp);
-            setLoading(false);
-            toast('Details updated !')
-        },(error)=>{
-            setLoading(false);
-            toast('Server Error, Please try again!')
-        })
-    };
     
+        try {
+            const resp = await GlobalApi.UpdateResumeDetail(params.resumeId, data);
+            setLoading(false);
+            toast('Details updated!');
+        } catch (error) {
+            console.error("Error updating resume:", error);
+            setLoading(false);
+            toast('Server Error, Please try again!');
+        }
+    };
     
     
   return (
@@ -103,7 +113,7 @@ function Experience() {
         <h2 className='font-bold text-lg'>Professional Experience</h2>
         <p>Add Your previous Job experience</p>
         <div>
-            {experienceList.map((item,index)=>(
+            {experienceList?.map((item,index)=>(
                 <div key={index}>
                     <div className='grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg'>
                         <div>
@@ -149,6 +159,7 @@ function Experience() {
                         <div className='col-span-2'>
                            {/* Work Summery  */}
                            <RichTextEditor
+                           name="workSummery"
                            index={index}
                            defaultValue={item?.workSummery}
                            onRichTextEditorChange={(event)=>handleRichTextEditor(event,'workSummery',index)}  />

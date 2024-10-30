@@ -7,14 +7,14 @@ import dummy from '@/data/dummy';
 import GlobalApi from '../../../../services/GlobalApi';
 
 const EditResume = () => {
-  const {reusmeId} = useParams();
+  const {resumeId} = useParams();
   const [resumeInfo, setResumeInfo] = useState();
   useEffect(() => {
     GetResumeInfo()
   }, [])
 
   const GetResumeInfo=()=>{
-    GlobalApi.GetResumeById(reusmeId).then(resp=>{
+    GlobalApi.GetResumeById(resumeId).then(resp=>{
       console.log(resp.data.data)
       setResumeInfo(resp.data.data)
     })
