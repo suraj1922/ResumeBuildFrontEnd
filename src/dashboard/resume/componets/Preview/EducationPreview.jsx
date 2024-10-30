@@ -1,5 +1,4 @@
 import React from 'react'
-
 function EducationalPreview({resumeInfo}) {
   return (
     <div className='my-6'>

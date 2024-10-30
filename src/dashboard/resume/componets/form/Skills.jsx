@@ -22,7 +22,7 @@ const Skills = () => {
         if (resumeInfo?.skills && Array.isArray(resumeInfo.skills)) {
             setSkillsList(resumeInfo.skills);
         }
-    }, [resumeInfo]);
+    }, []);
 
     const handlerChange = (index, name, value) => {
         const newEntries = [...skillsList]; // Make a copy of the array
