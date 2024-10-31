@@ -7,11 +7,16 @@ import dummy from '@/data/dummy';
 import GlobalApi from '../../../../services/GlobalApi';
 
 const EditResume = () => {
+  debugger;
   const {resumeId} = useParams();
   const [resumeInfo, setResumeInfo] = useState();
   useEffect(() => {
-    GetResumeInfo()
-  }, [])
+    if (resumeId) {  // Check if resumeId is defined
+      GetResumeInfo();
+    } else {
+      console.error("Resume ID is undefined");
+    }
+  }, [resumeId]); 
 
   const GetResumeInfo=()=>{
     GlobalApi.GetResumeById(resumeId).then(resp=>{

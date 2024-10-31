@@ -19,12 +19,14 @@ import { Navigate, useNavigate } from 'react-router-dom'
 // import { error } from 'console'
 
 const AddResume = () => {
+    debugger;
     const [openDialog, setOpenDialog] = useState(false)
     const [resumeTitle, setresumeTile] = useState();
     const { user } = useUser();
     const [loading, setLoading] = useState(false);
     const navigation = useNavigate()
     const onCreate = () => {
+        debugger;
         setLoading(true);
         const uuid = uuidv4();
         const data = {
@@ -40,7 +42,7 @@ const AddResume = () => {
             console.log(resp)
             if (resp) {
                 setLoading(false);
-                navigation('/dashboard/resume/' + resp.data.data.document + "/edit")
+                navigation('/dashboard/resume/' + resp.data.data.documentId + "/edit")
             }
         }, (error) => {
             setLoading(false)

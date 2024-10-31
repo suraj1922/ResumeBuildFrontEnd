@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/sonner"
 import { toast } from 'sonner';
 
 function PersonalDetail({enableNext}) {
+    debugger;
     const params = useParams();
     const {resumeInfo,setResumeInfo}=useContext(ResumeInfoContext)
     const [formData,setFormData] = useState();
@@ -36,7 +37,7 @@ function PersonalDetail({enableNext}) {
         const data={
             data:formData
         }
-        GlobalApi.UpdateResumeDetail(params?.resumeId,data).then(resp=>{
+        GlobalApi.UpdateResumeDetail(params.resumeId,data).then(resp=>{
             enableNext(true);
             setLoading(false);
             toast("Details Updated")
