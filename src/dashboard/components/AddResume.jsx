@@ -15,8 +15,7 @@ import { v4 as uuidv4 } from 'uuid';
 import GlobalApi from './../../../services/GlobalApi'
 import { useUser } from '@clerk/clerk-react'
 import { Navigate, useNavigate } from 'react-router-dom'
-// import { title } from 'process'
-// import { error } from 'console'
+n
 
 const AddResume = () => {
     debugger;
