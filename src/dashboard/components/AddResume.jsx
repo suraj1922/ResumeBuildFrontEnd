@@ -15,17 +15,15 @@ import { v4 as uuidv4 } from 'uuid';
 import GlobalApi from './../../../services/GlobalApi'
 import { useUser } from '@clerk/clerk-react'
 import { Navigate, useNavigate } from 'react-router-dom'
-n
+
 
 const AddResume = () => {
-    debugger;
     const [openDialog, setOpenDialog] = useState(false)
     const [resumeTitle, setresumeTile] = useState();
     const { user } = useUser();
     const [loading, setLoading] = useState(false);
     const navigation = useNavigate()
     const onCreate = () => {
-        debugger;
         setLoading(true);
         const uuid = uuidv4();
         const data = {
@@ -58,7 +56,7 @@ const AddResume = () => {
                     <DialogHeader>
                         <DialogTitle>Create New Resume</DialogTitle>
                         <DialogDescription>
-                            <p>Add a title for your new resume</p>
+                            <h4>Add a title for your new resume</h4>
                             <Input className='my-2'
                                 placeholder='Ex.Full Stack Resume'
                                 onChange={(e) => setresumeTile(e.target.value)} />

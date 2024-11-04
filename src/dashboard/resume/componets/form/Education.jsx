@@ -20,7 +20,7 @@ function Education() {
       major: '',
       startDate: '',
       endDate: '',
-      description: ''
+      percentage: ''
     }
   ])
 
@@ -32,7 +32,7 @@ function Education() {
         major: '',
         startDate: '',
         endDate: '',
-        description: ''
+        percentage: ''
       }
     ]);
   }, []);
@@ -54,7 +54,7 @@ function Education() {
         major: '',
         startDate: '',
         endDate: '',
-        description: ''
+        percentage: ''
       }
     ]);
   };
@@ -127,9 +127,9 @@ function Education() {
                   onChange={(e) => handleChange(e, index)}
                   defaultValue={item?.endDate} />
               </div>
-              <div className='col-span-2'>
-                <label>Description</label>
-                <Textarea name="description"
+              <div>
+                <label>CGPA / Percentage</label>
+                <Input name="percentage"
                   onChange={(e) => handleChange(e, index)}
                   defaultValue={item?.description} />
               </div>

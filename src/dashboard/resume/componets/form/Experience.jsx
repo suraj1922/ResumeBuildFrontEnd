@@ -89,6 +89,8 @@ function Experience() {
             endDate: endDate ? format(new Date(endDate), 'yyyy-MM-dd') : null,
         }));
     
+        
+
         const data = {
             data: {
                 experience: formattedExperienceList

@@ -7,7 +7,6 @@ import dummy from '@/data/dummy';
 import GlobalApi from '../../../../services/GlobalApi';
 
 const EditResume = () => {
-  debugger;
   const {resumeId} = useParams();
   const [resumeInfo, setResumeInfo] = useState();
   useEffect(() => {

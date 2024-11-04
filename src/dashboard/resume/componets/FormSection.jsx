@@ -28,7 +28,7 @@ const FormSection = () => {
         <div className='flex gap-2'>
           {activeFormIndex > 1 && <Button size="sm" onClick={() => setActiveFormIndex(activeFormIndex - 1)} className=""><ArrowLeft /></Button>}
           <Button
-            disabled={!enableNext}
+            disabled={enableNext}
             className="flex gap-2" size="sm"
             onClick={() => setActiveFormIndex(activeFormIndex + 1)}>Next<ArrowRight /></Button>
         </div>
@@ -36,9 +36,9 @@ const FormSection = () => {
 
       {/* Personal Detail */}
       {activeFormIndex == 1 ?
-        <PersonalDetails enableNext={(v) => setEnableNext(v)} />
+        <PersonalDetails />
         : activeFormIndex == 2 ?
-          <Summary enableNext={(v) => setEnableNext(v)} />
+          <Summary />
           : activeFormIndex == 3 ?
             <Experience />
             : activeFormIndex == 4 ?
