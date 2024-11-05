@@ -79,8 +79,6 @@ function Experience() {
     },[experienceList]);
 
     
-
-
     const onSave = async () => {
         setLoading(true);
         const formattedExperienceList = experienceList.map(({ startDate, endDate, ...rest }) => ({
