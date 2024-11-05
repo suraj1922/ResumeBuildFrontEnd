@@ -152,5 +152,4 @@ function Education() {
     </div>
   )
 }
-
 export default Education
