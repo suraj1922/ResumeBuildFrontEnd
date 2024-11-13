@@ -57,7 +57,6 @@ function Summery({enableNext}) {
          <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-10'>
         <h2 className='font-bold text-lg'>Summery</h2>
         <p>Add Summery for your job title</p>
-
         <form className='mt-7' onSubmit={onSave}>
             <div className='flex justify-between items-end'>
                 <label>Add Summery</label>
