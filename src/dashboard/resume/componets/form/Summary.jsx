@@ -78,7 +78,6 @@ function Summery({enableNext}) {
         </form>
         </div>
 
-        
        {aiGeneratedSummeryList&& <div className='my-5'>
             <h2 className='font-bold text-lg'>Suggestions</h2>
             {aiGeneratedSummeryList?.map((item,index)=>(
@@ -90,7 +89,6 @@ function Summery({enableNext}) {
                 </div>
             ))}
         </div>}
-
     </div>
   )
 }

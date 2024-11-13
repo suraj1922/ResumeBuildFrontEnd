@@ -33,7 +33,6 @@ const FormSection = () => {
             onClick={() => setActiveFormIndex(activeFormIndex + 1)}>Next<ArrowRight /></Button>
         </div>
       </div>
-
       {/* Personal Detail */}
       {activeFormIndex == 1 ?
         <PersonalDetails />
