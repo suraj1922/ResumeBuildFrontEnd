@@ -143,7 +143,6 @@ function Education() {
         <div className='flex gap-2'>
           <Button variant="outline" onClick={AddNewEducation} className="text-primary"> + Add More Education</Button>
           <Button variant="outline" onClick={RemoveEducation} className="text-primary"> - Remove</Button>
-
         </div>
         <Button disabled={loading} onClick={() => onSave()}>
           {loading ? <LoaderCircle className='animate-spin' /> : 'Save'}
