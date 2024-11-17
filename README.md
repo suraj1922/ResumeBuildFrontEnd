@@ -37,7 +37,7 @@ Submit a pull request with a detailed description.
 
 # 📧 Contact
 For questions or support, feel free to reach out:
-Email: your-surajgupta19224@gamil.com
+Email: surajgupta19224@gamil.com
 
 If you like this project, please give it a ⭐ on GitHub!
 
