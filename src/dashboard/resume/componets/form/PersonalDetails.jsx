@@ -19,7 +19,7 @@ function PersonalDetail({enableNext}) {
     },[])
 
     const handleInputChange=(e)=>{
-        enableNext(false)
+        // enableNext(false)
         const {name,value}=e.target;
 
         setFormData({
@@ -40,7 +40,7 @@ function PersonalDetail({enableNext}) {
         }
         GlobalApi.UpdateResumeDetail(params?.resumeId,data).then(resp=>{
             console.log(resp);
-            enableNext(true);
+            // enableNext(true);
             setLoading(false);
             toast("Details updated")
         },(error)=>{
